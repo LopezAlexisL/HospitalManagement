@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
     
-<data noupdate="1">
+<data>
 
     <record id="patient_view_form" model="ir.ui.view">
         <field name="name">patient.view.form</field>
@@ -12,8 +12,10 @@
                     <group>
                         <field name="name" />
                         <field name="last_name" />
+                        <field name="identification_num" />
                         <field name="age" />
                         <field name="gender" />
+                        <field name="active" />
                     </group>
                 </sheet>
             </form>
@@ -24,11 +26,10 @@
         <field name="name">hospital.patient.view.tree</field>
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
-            <tree string="">
+            <tree string="">            
                 <field name="name" />
                 <field name="last_name" />
-                <field name="age" />
-                <field name="gender" />
+                <field name="identification_num" />
             </tree>
         </field>
     </record>
@@ -43,6 +44,32 @@
             <p>
                 No patients loged yet
             </p>
+        </field>
+    </record>
+
+    <record id="hospital_patient_view_search" model="ir.ui.view">
+        <field name="name">hospital.patient.view.search</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="name" filter_domain="['|',('name', 'ilike', self), ('last_name', 'ilike', self)]"/>
+                <field name="last_name" />
+                <field name="identification_num" />
+                <field name="age" />
+                <field name="gender" />
+                <filter name="filter_male" string="Male" domain="[('gender', '=', 'm')]" />
+                <filter name="filter_female" string="Female" domain="[('gender', '=', 'f')]" />
+                <separator/>
+                <filter name="filter_minor" string="Minor" domain="[('age', '&lt;', '18')]" />
+                <filter name="filter_active" string="Archived" domain="[('active', '=', False)]" />
+                <filter name="filter_age" string="Age" context="{'group_by': 'age'}" />
+                <group expand='0' string="Group By">
+                    <filter name="filter_age" string="Age 2" context="{'group_by': 'age'}" />                    
+                </group>
+                <searchpanel>
+                    <field name="gender" string='Genders' enable_counters='1' />
+                </searchpanel>
+            </search>
         </field>
     </record>
 
