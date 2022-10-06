@@ -3,6 +3,7 @@
     
 <data>
 
+
     <record id="patient_view_form" model="ir.ui.view">
         <field name="name">patient.view.form</field>
         <field name="model">hospital.patient</field>
@@ -18,9 +19,15 @@
                         <field name="active" />
                     </group>
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>s
             </form>
         </field>
     </record>
+
 
     <record id="hospital_patient_view_tree" model="ir.ui.view">
         <field name="name">hospital.patient.view.tree</field>
@@ -34,18 +41,6 @@
         </field>
     </record>
 
-    <record id="patient_action" model="ir.actions.act_window">
-        <field name="name">Patients</field>
-        <field name="res_model">hospital.patient</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">[]</field>
-        <field name="context">{}</field>
-        <field name="help" type="html" >
-            <p>
-                No patients loged yet
-            </p>
-        </field>
-    </record>
 
     <record id="hospital_patient_view_search" model="ir.ui.view">
         <field name="name">hospital.patient.view.search</field>
@@ -60,11 +55,11 @@
                 <filter name="filter_male" string="Male" domain="[('gender', '=', 'm')]" />
                 <filter name="filter_female" string="Female" domain="[('gender', '=', 'f')]" />
                 <separator/>
-                <filter name="filter_minor" string="Minor" domain="[('age', '&lt;', '18')]" />
+                <filter name="filter_minor" string="Minor" domain="[('age', '&lt;=', '18')]" />
                 <filter name="filter_active" string="Archived" domain="[('active', '=', False)]" />
-                <filter name="filter_age" string="Age" context="{'group_by': 'age'}" />
+                <filter name="group_by_age" string="Age" context="{'group_by': 'age'}" />
                 <group expand='0' string="Group By">
-                    <filter name="filter_age" string="Age 2" context="{'group_by': 'age'}" />                    
+                    <filter name="group_by_age2" string="Age 2" context="{'group_by': 'age'}" />                    
                 </group>
                 <searchpanel>
                     <field name="gender" string='Genders' enable_counters='1' />
@@ -73,12 +68,27 @@
         </field>
     </record>
 
+    <record id="patient_action" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_filter_male':1, 'search_default_group_by_age':1}</field>
+        <field name="help" type="html" >
+            <p>
+                No patients loged yet
+            </p>
+        </field>
+    </record>
+
+
     <menuitem
         id="patient_submenu"
         name="Patients"
         action="patient_action"
         parent="patient_main_menu"
         sequence="1"/>
+
 
 </data>
 

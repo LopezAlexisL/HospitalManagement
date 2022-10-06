@@ -3,12 +3,14 @@
     
 <data>
 
+
+
     <record id="female_patient_action" model="ir.actions.act_window">
         <field name="name">Female Patients</field>
         <field name="res_model">hospital.patient</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('gender', '=', 'f')]</field>
-        <field name="context">{}</field>
+        <field name="context">{'default_gender':'f'}</field>
         <field name="help" type="html" >
             <p class="o_view_nocontent_smiling_face">
                 No female patients loged yet
