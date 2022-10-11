@@ -14,6 +14,12 @@
         name="Patients"
         parent='hospital_main_menu'
         sequence="1"/>
+
+    <menuitem
+        id="appointment_main_menu"
+        name="Appointments"
+        parent='hospital_main_menu'
+        sequence="2"/>
         
 </data>
 

@@ -9,8 +9,16 @@
         <field name="arch" type="xml">
             <form string="">
                 <sheet>
-                    <group>
-                        <field name="patient_id" />
+                    <group>                      
+                        <group>
+                            <field name="patient_id" />
+                            <field name="gender" />
+                            <field name="identification_num" />
+                        </group>
+                        <group>
+                            <field name="appointment_time" />
+                            <field name="booking_time" />
+                        </group>
                     </group>
                 </sheet>
             </form>
@@ -22,7 +30,10 @@
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
             <tree string="">
-                
+                <field name="patient_id" />
+                <field name="gender" />
+                <field name="appointment_time" />
+                <field name="booking_time" />               
             </tree>
         </field>
     </record>
@@ -54,7 +65,7 @@
         id="appointment_submenu"
         name="Appointment"
         action="hospital_appointment_action"
-        parent='patient_main_menu'
+        parent='appointment_main_menu'
         sequence="10"/>
 
 </data>
