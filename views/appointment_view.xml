@@ -8,18 +8,41 @@
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
             <form string="">
+                <header>
+                    <field name="state" widget='statusbar' nolabel='1' options="{'clickable': '1'}" statusbar_visible='draft,in_consultation,done' />
+                </header>
                 <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="priority" widget='priority' class='mr-3' />
+                        </h1>
+                    </div>
                     <group>                      
                         <group>
-                            <field name="patient_id" />
+                            <field name="patient_id" help='Patient Name' />
                             <field name="gender" />
                             <field name="identification_num" />
                         </group>
                         <group>
                             <field name="appointment_time" />
                             <field name="booking_time" />
+                            <field name="doctor" widget='many2one_avatar_user' />
+                            <button name="action_button" string='Click me' type="object" class="oe_highlight" />
                         </group>
                     </group>
+                    <notebook>
+                        <page name="prescription" string="Prescription">
+                            <group>
+                                <field name="appointment_time" />
+                                <field name="prescription" placeholder='Enter your prescription' />
+                            </group>
+                        </page>
+                        <page name="pharmacy" string="Pharmacy">
+                            <group>
+                                <field name="booking_time" />
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -29,11 +52,15 @@
         <field name="name">hospital.appointment.view.tree</field>
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
-            <tree string="">
+            <tree decoration-warning="state == 'draft'" decoration-success="state == 'done'" decoration-info="state == 'in_consultation'"  decoration-danger="state == 'canceled'">
                 <field name="patient_id" />
                 <field name="gender" />
-                <field name="appointment_time" />
-                <field name="booking_time" />               
+                <field name="priority" widget='priority' class='mr-3'/>
+                <field name="doctor" widget='many2one_avatar_user' />
+                <field name="activity_ids" widget="list_activity"/>
+                <field name="appointment_time" optional='hide' />
+                <field name="booking_time" />           
+                <field name="state" widget='badge' decoration-warning="state == 'draft'" decoration-success="state == 'done'" decoration-info="state == 'in_consultation'"  decoration-danger="state == 'canceled'" />           
             </tree>
         </field>
     </record>
@@ -43,7 +70,9 @@
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
             <search string="">
-                
+                <group expand='1' string="Group By">
+                    <filter name="group_by_state" string="State" context="{'group_by': 'state'}" />                    
+                </group>
             </search>
         </field>
     </record>
@@ -53,7 +82,7 @@
         <field name="res_model">hospital.appointment</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
-        <field name="context">{}</field>
+        <field name="context">{'search_default_group_by_state':1}</field>
         <field name="help" type="html">
             <p>
                 Create an appointment
