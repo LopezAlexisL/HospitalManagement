@@ -11,6 +11,7 @@
     'depends': [
         'base',
         'mail',
+        'product',
     ],
     'data': [
         'security/ir.model.access.csv',

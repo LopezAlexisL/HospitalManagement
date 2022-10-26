@@ -7,9 +7,13 @@
         <field name="name">hospital.appointment.view.form</field>
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
-            <form string="">
+            <form string="" sample='1'>
                 <header>
-                    <field name="state" widget='statusbar' nolabel='1' options="{'clickable': '1'}" statusbar_visible='draft,in_consultation,done' />
+                    <button name="action_draft" type="object" string="Return to Draft" class="oe_highlight" />
+                    <button name="action_in_consultation" type="object" string="In Consultation" class="oe_highlight" />
+                    <button name="action_done" type="object" string="Done" class="oe_highlight" states='in_consultation'/>
+                    <button name="action_canceled" type="object" string="Canceled" class="oe_highlight" />
+                    <field name="state" widget='statusbar' nolabel='1' statusbar_visible='draft,in_consultation,done' />
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -19,11 +23,12 @@
                     </div>
                     <group>                      
                         <group>
-                            <field name="patient_id" help='Patient Name' />
+                            <field name="patient_id" help='Patient Name' default_focus='1' />
                             <field name="gender" />
                             <field name="identification_num" />
                         </group>
                         <group>
+                            <field name="hide_price" />
                             <field name="appointment_time" />
                             <field name="booking_time" />
                             <field name="doctor" widget='many2one_avatar_user' />
@@ -34,12 +39,27 @@
                         <page name="prescription" string="Prescription">
                             <group>
                                 <field name="appointment_time" />
-                                <field name="prescription" placeholder='Enter your prescription' />
+                                <field name="prescription" placeholder='Enter your prescription' options="{'collaborative': true, 'resizable': true}" />
                             </group>
                         </page>
                         <page name="pharmacy" string="Pharmacy">
                             <group>
-                                <field name="booking_time" />
+                                <field name="pharmacy_ids">
+                                    <tree string="" editable='bottom'>
+                                        <field name="qty" />      
+                                        <field name="price_unit" attrs="{'column_invisible':[('parent.hide_price','=', True)]}" />      
+                                        <field name="product_id" />      
+                                    </tree>
+                                    <form string="" >
+                                        <sheet>
+                                            <group>
+                                                <field name="qty" />      
+                                                <field name="price_unit" attrs="{'column_invisible':[('parent.hide_price','=', True)]}" />      
+                                                <field name="product_id" />   
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
                             </group>
                         </page>
                     </notebook>
@@ -52,7 +72,7 @@
         <field name="name">hospital.appointment.view.tree</field>
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
-            <tree decoration-warning="state == 'draft'" decoration-success="state == 'done'" decoration-info="state == 'in_consultation'"  decoration-danger="state == 'canceled'">
+            <tree decoration-warning="state == 'draft'" decoration-success="state == 'done'" decoration-info="state == 'in_consultation'"  decoration-danger="state == 'canceled'" sample='1' multi_edit='1'>
                 <field name="patient_id" />
                 <field name="gender" />
                 <field name="priority" widget='priority' class='mr-3'/>
