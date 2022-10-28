@@ -2,3 +2,5 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 hospital_mng,hospital_mng,model_hospital_patient,base.group_user,1,1,1,1
 hospital_appointment,hospital_appointment,model_hospital_appointment,base.group_user,1,1,1,1
 appointment_pharmacy,appointment_pharmacy,model_appointment_pharmacy,base.group_user,1,1,1,1
+patient_tag,patient_tag,model_patient_tag,base.group_user,1,1,1,1
+cancel_appointment_wizard,cancel_appointment_wizard,model_cancel_appointment_wizard,base.group_user,1,1,1,1

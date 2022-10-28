@@ -12,7 +12,7 @@
                     <button name="action_draft" type="object" string="Return to Draft" class="oe_highlight" />
                     <button name="action_in_consultation" type="object" string="In Consultation" class="oe_highlight" />
                     <button name="action_done" type="object" string="Done" class="oe_highlight" states='in_consultation'/>
-                    <button name="action_canceled" type="object" string="Canceled" class="oe_highlight" />
+                    <button name="%(cancel_appointment_action)d" type="action" string="Canceled" class="oe_highlight" />
                     <field name="state" widget='statusbar' nolabel='1' statusbar_visible='draft,in_consultation,done' />
                 </header>
                 <sheet>
@@ -85,6 +85,20 @@
         </field>
     </record>
 
+    <record id="hospital_appointment_view_activity" model="ir.ui.view">
+        <field name="name">hospital.appointment.view.activity</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <activity string="">
+                <templates>
+                    <div t-name="activity-box">
+                        <field name="patient_id" />
+                    </div>
+                </templates>
+            </activity>
+        </field>
+    </record>
+
     <record id="hospital_appointment_view_search" model="ir.ui.view">
         <field name="name">hospital.appointment.view.search</field>
         <field name="model">hospital.appointment</field>
@@ -100,11 +114,11 @@
     <record id="hospital_appointment_action" model="ir.actions.act_window">
         <field name="name">Hospital Appointment</field>
         <field name="res_model">hospital.appointment</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,activity</field>
         <field name="domain">[]</field>
         <field name="context">{'search_default_group_by_state':1}</field>
         <field name="help" type="html">
-            <p>
+            <p class="o_view_nocontent_smiling_face">
                 Create an appointment
             </p>
         </field>

@@ -20,7 +20,13 @@
         name="Appointments"
         parent='hospital_main_menu'
         sequence="2"/>
-        
+
+    <menuitem
+        id="patient_tag_main_menu"
+        name="Configuration"
+        parent='hospital_main_menu'
+        sequence="3"/>
+
 </data>
 
 
