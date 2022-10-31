@@ -1,1 +1,1 @@
-from . import patient, appointment, patient_tag
+from . import patient, appointment, patient_tag, sale_inherit

@@ -14,6 +14,7 @@
                         <field name="name" />
                         <field name="last_name" />
                         <field name="identification_num" />
+                        <field name="patient_reference" />
                         <field name="birth_date" />
                         <field name="age" />
                         <field name="gender" />
