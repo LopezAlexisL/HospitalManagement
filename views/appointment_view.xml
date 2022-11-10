@@ -124,12 +124,10 @@
         </field>
     </record>
 
-    <menuitem
-        id="appointment_submenu"
-        name="Appointment"
-        action="hospital_appointment_action"
-        parent='appointment_main_menu'
-        sequence="10"/>
+
+    <menuitem id="appointment_main_menu" name="Appointments" parent='hospital_main_menu' sequence="2">
+        <menuitem id="appointment_submenu" name="Appointment" action="hospital_appointment_action" sequence="10"/>
+    </menuitem> <!-- otra forma de crear submenus utilizando jerarquia - el menu principal lo movi desde la viste de menu hasta las vista appointment y defini el child dentro del tag de main menu-->
 
 </data>
 

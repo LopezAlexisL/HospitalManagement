@@ -5,3 +5,4 @@ appointment_pharmacy,appointment_pharmacy,model_appointment_pharmacy,base.group_
 patient_tag,patient_tag,model_patient_tag,base.group_user,1,1,1,1
 cancel_appointment_wizard,cancel_appointment_wizard,model_cancel_appointment_wizard,base.group_user,1,1,1,1
 sale_order,sale_order,model_sale_order,base.group_user,1,1,1,1
+odoo_playground,odoo_playground,model_odoo_playground,base.group_user,1,1,1,1

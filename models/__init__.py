@@ -1,1 +1,1 @@
-from . import patient, appointment, patient_tag, sale_inherit
+from . import patient, appointment, patient_tag, sale_inherit, odoo_playground

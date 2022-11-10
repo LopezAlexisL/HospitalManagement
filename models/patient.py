@@ -36,3 +36,16 @@ class Patient(models.Model):
                 rec.age = today.year - rec.birth_date.year - ((today.month, today.day) < (rec.birth_date.month, rec.birth_date.day))
             else:
                 rec.age = 0
+
+
+    def name_get(self):
+        return [(rec.id , '[%s] %s' % (rec.identification_num, rec.name)) for rec in self]
+        '''
+        Also can be returned as [(rec.id , '%s:%s' % (rec.name, rec.identification_num)) for rec in self]
+        or 
+        patient_list = []
+        for rec in self:
+            name =  rec.name + ' / ' + str(rec.identification_num)
+            patient_list.append((rec.id, name))
+        return patient_list
+        '''

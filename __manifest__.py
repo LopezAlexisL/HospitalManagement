@@ -26,6 +26,7 @@
         'views/appointment_view.xml',
         'views/patient_tag_view.xml',
         'views/sale_order_view.xml',
+        'views/odoo_playground_view.xml',
     ],
     'demo': [
         ''
